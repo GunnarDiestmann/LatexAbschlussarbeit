@@ -1,0 +1,568 @@
+ % ----------------------------------------------------------------
+% Thesis - Main document
+% ----------------------------------------------------------------
+
+\documentclass{thesisclass}
+% as defined in thesisclass.cls
+
+
+%% ---------------------------------
+%% | Information about the thesis  |
+%% ---------------------------------
+
+\newcommand{\myname}{Gunnar Diestmann}
+\newcommand{\mytitle}{Trajektorienplanung f\"ur einen kooperativen Fahrstreifenwechsel hochautomatisierter Fahrzeuge Versuch3}
+
+\newcommand{\reviewerone}{Prof. Dr.-Ing. Christoph Stiller}
+\newcommand{\advisor}{Maximilian Naumann, M.Sc.}
+
+\newcommand{\timeandplace}{Karlsruhe, Mai 2019}
+
+\newcommand{\frontmatterhint}{Draft! / Vorl\"aufige Fassung!}
+
+%% -------------------------------
+%% |  Information for PDF file   |
+%% -------------------------------
+\hypersetup{
+ pdfauthor={\myname},
+ pdftitle={\mytitle},
+ pdfsubject={Thesis},
+ pdfkeywords={Trajektorienplanung, kooperative Verhaltensplanung, Multi-Agenten-Optimimierung, Fahrstreifenwechsel, Kostenfunktional, Pfadplanung}
+}
+
+
+%\usepackage[english]{babel}  	% English
+\usepackage[ngerman]{babel}  	% German
+\usepackage[ngerman]{translator} 
+
+
+%% -------------------------------
+%% |    My packages /commands    |
+%% -------------------------------
+% track changes
+    %\usepackage{changes} 		% highlight changes
+	\usepackage[final]{changes}	% don't highlight changes
+
+% tables
+	\usepackage{array,multirow,graphicx}
+
+% pseudocode
+	\usepackage[ruled,vlined]{algorithm2e}
+
+% for forcing positions of tables, figures, ...
+	\usepackage{float}
+
+% units
+	\usepackage{siunitx}
+	\usepackage{dcolumn}
+
+
+%% --------------------------------
+%% |      glossaries               |
+%% --------------------------------
+\newif\ifuseglossaries			% as the glossaries package sometimes causes problems, you can switch if of
+								% if switching of, remember to remove all \gls{}/... statements
+								
+\useglossariestrue				% use glossaries (acronyms and online references)
+% \useglossariesfalse			% don't use glossaries
+
+\ifuseglossaries
+	\usepackage[acronym,xindy,toc,nomain,nonumberlist,nopostdot,notranslate]{glossaries}%
+
+	\newglossary[onlineref]{onlineref}{onli}{onlo}{Online Referenzen}
+	
+	%Ein eigenes Symbolverzeichnis erstellen
+	\newglossary[slg]{symbolslist}{syi}{syg}{Symbolverzeichnis}
+ 
+	%Den Punkt am Ende jeder Beschreibung deaktivieren
+	\renewcommand*{\glspostdescription}{}
+	
+	\newglossarystyle{mylong}{%
+  		\setglossarystyle{long}%
+  		\renewcommand*{\glsnamefont}[1]{\textbf{##1}}%
+  	}%
+  	
+  	\newglossarystyle{mylist}{%
+  		\setglossarystyle{list}%
+  		\renewcommand*{\glsnamefont}[1]{\textrm{\textmd{##1}}}%
+  	}%
+  	
+  	\makeglossaries
+  	
+	% ordinary acronyms
+	
+	\newacronym{idm}{IDM}{Inteligent Driver Model}
+	\newacronym{mcts}{MCTS}{Monte Carlo Tree Search}
+	\newacronym{ettc}{ETTC}{Enhanced Time to Collision}
+	\newacronym{pvd}{PVD}{Path Velocity Decomposition}
+	\newacronym{ros}{ROS}{Robot Operating System}
+	
+	% usage: \gls{} \glspl{} or \acrshort{}
+	
+	%Befehle für Symbole
+	%Zeit
+	\newglossaryentry{symb:t_lc}{
+	name=$t_\mathrm{lc}$,
+	description={Zeitpunkt des Fahrstreifenwechsels: Fahrbahnmarkierung wird \"uberquert [$s$]},
+	sort=atimelanechange, type=symbolslist
+	}
+	\newglossaryentry{symb:t_coop,start}{
+	name=$t_\mathrm{coop,start}$,
+	description={Beginn der Kooperation [$s$]},
+	sort=atimecoopstart, type=symbolslist
+	}
+	\newglossaryentry{symb:t_coop,end}{
+	name=$t_\mathrm{coop,end}$,
+	description={Ende der Kooperation [$s$]},
+	sort=atimecoopend, type=symbolslist
+	}
+	\newglossaryentry{symb:t_abs}{
+	name=$T_\mathrm{abs}$,
+	description={Gew\"unschter Zeitabstand zum vorausfahrenden Fahrzeug [$s$]},
+	sort=atimeabs, type=symbolslist
+	}
+	\newglossaryentry{symb:t_lcd}{
+	name=$t_\mathrm{lcd}$,
+	description={Dauer des Fahrstreifenwechsels [$s$]},
+	sort=atimelanechangedauer, type=symbolslist
+	}
+	\newglossaryentry{symb:t_verarb}{
+	name=$t_\mathrm{verarb}$,
+	description={Ben\"otigte Zeit zur Trajektorienplanung / Neuplanungsintervall [$s$]},
+	sort=atimever, type=symbolslist
+	}
+	\newglossaryentry{symb:t_jetzt}{
+	name=$t_\mathrm{jetzt}$,
+	description={Beginn des Planungshorizonts [$s$]},
+	sort=atimejetzt, type=symbolslist
+	}
+	
+	%Kosten
+	\newglossaryentry{symb:G_ego}{
+	name=$G_\mathrm{ego}$,
+	description={Kosten des Ego-Fahrzeuges},
+	sort=aKostenego, type=symbolslist
+	}
+	\newglossaryentry{symb:G_coop}{
+	name=$G_i^\mathrm{t,coop}$,
+	description={Kosten der kooperativen Fahrzeuge w\"ahrend der Kooperation},
+	sort=aKostencoop, type=symbolslist
+	}
+	\newglossaryentry{symb:G_v}{
+	name=$G_\mathrm{v}$,
+	description={Geschwindigkeitskostenterm},
+	sort=aKostengesch, type=symbolslist
+	}
+	\newglossaryentry{symb:G_a}{
+	name=$G_\mathrm{a}$,
+	description={Beschleunigungskostenterm},
+	sort=aKostenbesch, type=symbolslist
+	}
+	\newglossaryentry{symb:G_sd}{
+	name=$G_\mathrm{sd}$,
+	description={Kostenterm f\"ur Sicherheitsabst\"ande},
+	sort=aKostensd, type=symbolslist
+	}
+	\newglossaryentry{symb:G_lc}{
+	name=$G_\mathrm{lc}$,
+	description={Kostenterm f\"ur Fahrstreifenwechsel},
+	sort=aKostenfw, type=symbolslist
+	}
+	\newglossaryentry{symb:G_lcend}{
+	name=$G_\mathrm{lc,end}$,
+	description={Kostenterm f\"ur Zustand am End der Kooperation},
+	sort=aKostenfwe, type=symbolslist
+	}
+	\newglossaryentry{symb:G_comf}{
+	name=$G_\mathrm{comf}$,
+	description={Komfortkosten},
+	sort=aKostenkomf, type=symbolslist
+	}
+	\newglossaryentry{symb:G_disc}{
+	name=$G_\mathrm{disc}$,
+	description={Diskomfortkosten},
+	sort=aKostendiscomf, type=symbolslist
+	}
+	\newglossaryentry{symb:G_inf}{
+	name=$G_\mathrm{inf}$,
+	description={Unrealisierbarkeitskosten},
+	sort=aKosteninf, type=symbolslist
+	}
+	
+	\newglossaryentry{symb:f_opt}{
+	name=$f_\mathrm{opt}$,
+	description={Festgelegtes Optimum},
+	sort=afinfpopt, type=symbolslist
+	}
+	
+	\newglossaryentry{symb:f_discstartp}{
+	name=$f_\mathrm{disc,start}^+$,
+	description={Grenze zur Diskomfortzone bei positiver Abweichung vom Optimum},
+	sort=afdiscp, type=symbolslist
+	}
+	
+	\newglossaryentry{symb:f_discstartn}{
+	name=$f_\mathrm{disc,start}^-$,
+	description={Grenze zur Diskomfortzone bei negativer Abweichung vom Optimum},
+	sort=afdiscn, type=symbolslist
+	}
+	
+	\newglossaryentry{symb:f_infstartp}{
+	name=$f_\mathrm{inf,start}^+$,
+	description={Grenze zur Unrealisierbarkeitszone bei positiver Abweichung vom Optimum},
+	sort=afinfp, type=symbolslist
+	}
+	
+	\newglossaryentry{symb:f_infstartn}{
+	name=$f_\mathrm{inf,start}^-$,
+	description={Grenze zur Unrealisierbarkeitszone bei negativer Abweichung vom Optimum},
+	sort=afinfn, type=symbolslist
+	}
+	
+	%Trajektorie
+	\newglossaryentry{symb:x_optTra}{
+	name=$\pmb{x}$,
+	description={Optimale Trajektorie},
+	sort=aTrajektorie, type=symbolslist
+	}
+	\newglossaryentry{symb:x_Traset}{
+	name=$\pmb{X}$,
+	description={Trajektorienset},
+	sort=aTrajektorienset, type=symbolslist
+	}
+	\newglossaryentry{symb:x_TraDisk}{
+	name=$\pmb{x}_k$,
+	description={Diskreter Zeitschritt der optimal Trajektorie},
+	sort=aTrajektoriendik, type=symbolslist
+	}
+	
+	\newglossaryentry{symb:h}{
+	name=$h$,
+	description={Diskretisierungsschrittweite [$s$]},
+	sort=ah, type=symbolslist
+	}
+	
+	
+	\newglossaryentry{symb:Zone_komf}{
+	name=$Z_\mathrm{comf}$,
+	description={Komfortzone},
+	sort=aZonecomf, type=symbolslist
+	}
+	\newglossaryentry{symb:Zone_disc}{
+	name=$Z_\mathrm{disc}$,
+	description={Diskomfortzone},
+	sort=aZonedisc, type=symbolslist
+	}
+	\newglossaryentry{symb:Zone_inf}{
+	name=$Z_\mathrm{inf}$,
+	description={Unrealisierbarkeitszone},
+	sort=aZoneinf, type=symbolslist
+	}
+	
+	%Frenet-Koordianten
+	\newglossaryentry{symb:s_r}{
+	name=$s_r$,
+	description={Wegstrecke entlang der Referenzkurve in Frenet-Koordinaten [$m$]},
+	sort=asr, type=symbolslist
+	}
+	\newglossaryentry{symb:d_r}{
+	name=$d_r$,
+	description={Abstand von der Referenzkurve in Frenet-Koordinaten [$m$]},
+	sort=adr, type=symbolslist
+	}
+	
+	\newglossaryentry{symb:s_cs}{
+	name=$s_\mathrm{change}^\mathrm{start}$,
+	description={Beginn des Fahrstreifenwechsels in Frenet-Koordinaten [$m$]},
+	sort=ascs, type=symbolslist
+	}
+	\newglossaryentry{symb:s_ce}{
+	name=$s_\mathrm{change}^\mathrm{end}$,
+	description={Ende des Fahrstreifenwechsels in Frenet-Koordinaten [$m$]},
+	sort=asce, type=symbolslist
+	}
+	\newglossaryentry{symb:s_cmin}{
+	name=$s_\mathrm{change}^\mathrm{min}$,
+	description={Fr\"uhst m\"oglicher Fahrstreifenwechsels in Frenet-Koordinaten [$m$]},
+	sort=ascmin, type=symbolslist
+	}
+	\newglossaryentry{symb:s_cmax}{
+	name=$s_\mathrm{change}^\mathrm{max}$,
+	description={Weckstreck in Frenet-K. bis zu der der Fahrstreifenwechsel beendet sein muss [$m$]},
+	sort=ascmax, type=symbolslist
+	}
+	
+	\newglossaryentry{symb:d_normal}{
+	name=$d_\mathrm{normal}$,
+	description={Normalisierter Sicherheitsabstand},
+	sort=adnormal, type=symbolslist
+	}
+	
+	\newglossaryentry{symb:d_sd}{
+	name=$d_\mathrm{sd}$,
+	description={Gew\"unschter Sicherheitsabstand [$m$]},
+	sort=adsd, type=symbolslist
+	}
+	
+	\newglossaryentry{symb:d_tlc}{
+	name=$d_\mathrm{t,lc}$,
+	description={Abstand zum hinteren Fahrzeug zum Zeitpunkt des Fahrstreifenwechsels [$m$]},
+	sort=adtlc, type=symbolslist
+	}
+	
+	\newglossaryentry{symb:b_nece}{
+	name=$b_\mathrm{nece}$,
+	description={Notwendige Verz\"ogerung des hinteren Fahrzeugs beim Fahrstreifenwechsels [$m/s^2$]},
+	sort=abnece, type=symbolslist
+	}
+	
+	
+	
+	%Pfad
+	\newglossaryentry{symb:F_init}{
+	name=$F_\mathrm{init}$,
+	description={Pfad des aktuellen Fahrstreifens},
+	sort=aFinit, type=symbolslist
+	}
+	\newglossaryentry{symb:F_target}{
+	name=$F_\mathrm{target}$,
+	description={Pfad des Zielahrstreifens},
+	sort=aFtarget, type=symbolslist
+	}
+	\newglossaryentry{symb:F_change}{
+	name=$F_\mathrm{change}$,
+	description={Fahrstreifenwechselpfad},
+	sort=aFini, type=symbolslist
+	}
+	\newglossaryentry{symb:F_lc}{
+	name=$F_\mathrm{lc}$,
+	description={Gesamtpfad der Fahrstreifenwechseltrajektorie},
+	sort=aFlc, type=symbolslist
+	}
+	
+	\newglossaryentry{symb:b_krit}{
+	name=$b_\mathrm{krit}$,
+	description={Grenzverz\"ogerung die gerade noch im sicheren Bereich ist [$m/s^2$]},
+	sort=abkrit, type=symbolslist
+	}
+	
+	%Geschwindigkeiten und Beschleunigungen
+	\newglossaryentry{symb:a_start}{
+	name=$a_\mathrm{start}$,
+	description={Ausgangsbescheunigung [$m/s^2$]},
+	sort=aastart, type=symbolslist
+	}
+	
+	\newglossaryentry{symb:a_lcend}{
+	name=$a_\mathrm{lc,end}$,
+	description={Angenommene Beschleunigung nach Ende des Fahrstreifenwechsels [$m/s^2$]},
+	sort=aalcend, type=symbolslist
+	}
+	
+	\newglossaryentry{symb:v_start}{
+	name=$v_\mathrm{start}$,
+	description={Ausgangsgeschwindigkeit [$m/s$]},
+	sort=avstart, type=symbolslist
+	}
+	
+	\newglossaryentry{symb:v_opt}{
+	name=$v_\mathrm{opt}$,
+	description={Optimalgeschwindigkeit [$m/s$]},
+	sort=avopt, type=symbolslist
+	}
+	
+	
+	% Griechische Buchstaben	
+	\newglossaryentry{symb:theta}{
+	name=$\theta$,
+	description={Richtung der Trajektorie in Weltkoordinaten},
+	sort=gtheta, type=symbolslist
+	}
+	\newglossaryentry{symb:theta_ref}{
+	name=$\theta_\mathrm{ref}$,
+	description={Richtung der Referenzkurve in Weltkoordinaten},
+	sort=gthetaref, type=symbolslist
+	}
+	\newglossaryentry{symb:kappa_ref}{
+	name=$\kappa_\mathrm{ref}$,
+	description={Kr\"ummung der Referenzkurve [$1/m$]},
+	sort=gkapparef, type=symbolslist
+	}
+	
+	%Abkürzungsverzeichnis
+	%\newglossaryentry{idm}{type=abkref}{IDM}{Inteligent Driver Model}
+	
+	
+	
+	% online references
+	\newglossaryentry{medium}{
+		type=onlineref, 
+		name={[01]}, 
+		description={\hspace{1.5mm}Architektur automatisiertes Fahrzeug\newline 
+			\href{https://medium.com/@macchakaran/udacity-self-driving-car-project-11-path-planning-a8266eb04515}{https://medium.com/}\newline 
+			retrieved 2019-04-15 }}
+	
+	
+	\newglossaryentry{judica}{
+		type=onlineref, 
+		name={[02]}, 
+		description={\hspace{1.5mm}Rechtsspruch Spurewchsel\newline 
+			\href{http://www.judicialis.de/Oberlandesgericht-Koblenz\_1-Ss-75-02\_Beschluss\_02.05.2002.html}{http://www.judicialis.de/}\newline 
+			retrieved 2019-05-17 }}
+			
+	\newglossaryentry{isoettc}{
+		type=onlineref, 
+		name={[03]}, 
+		description={\hspace{1.5mm}ISO 15623:2013\newline 
+			\href{https://www.iso.org/obp/ui/\#iso:std:iso:15623:ed-2:v1:en}{https://www.iso.org/}\newline 
+			retrieved 2019-05-24 }}
+			
+	\newglossaryentry{hun}{
+		type=onlineref, 
+		name={[04]}, 
+		description={\hspace{1.5mm}Haid-und-Neu-Stra{\ss}e Google Maps\newline 
+			\href{https://www.google.de/maps/place/Haid-und-Neu-Stra{\ss}e,+76131+Karlsruhe/@49.0162371,8.4358527,521m/data=!3m1!1e3!4m5!3m4!1s0x479707d51d17bb95:0xfd773b86351ec7bf!8m2!3d49.0164625!4d8.437736}{https://www.google.de/maps/}\newline 
+			retrieved 2019-05-24 }}
+			
+	
+			
+	
+\else
+\fi
+
+
+%% ---------------------------------
+%% | ToDo Marker - only for draft! |
+%% ---------------------------------
+% Remove this section for final version!
+\setlength{\marginparwidth}{20mm}
+
+\newcommand{\margtodo}
+{\marginpar{\textbf{\textcolor{blue}{ToDo}}}{}}
+
+\newcommand{\todo}[1]
+{{\textbf{\textcolor{blue}{(\margtodo{}#1)}}}{}}
+
+\newcommand{\margmajortodo}
+{\marginpar{\textbf{\textcolor{red}{ToDo}}}{}}
+
+\newcommand{\majortodo}[1]
+{{\textbf{\textcolor{red}{(\margmajortodo{}#1)}}}{}}
+
+%% --------------------------------
+%% | Draft Marker - only for draft! |
+%% --------------------------------
+% Remove this section for final version!
+%\usepackage{draftwatermark}
+%\SetWatermarkText{\hspace{10pt}-draft-}
+%\SetWatermarkScale{2.3}
+%\SetWatermarkColor[gray]{0.95}
+
+
+%% --------------------------------
+%% | Old Marker - only for draft! |
+%% --------------------------------
+% Remove this section for final version!
+\newenvironment{deprecated}
+{\begin{color}{gray}}
+{\end{color}}
+
+
+%% --------------------------------
+%% | Settings for word separation |
+%% --------------------------------
+% Help for separation:
+% In german package the following hints are additionally available:
+% "- = Additional separation
+% "| = Suppress ligation and possible separation (e.g. Schaf"|fell)
+% "~ = Hyphenation without separation (e.g. bergauf und "~ab)
+% "= = Hyphenation with separation before and after
+% "" = Separation without a hyphenation (e.g. und/""oder)
+
+% Describe separation hints here:
+\hyphenation{
+Wort-tren-nung
+% Ma-na-ge-ment  Netz-werk-ele-men-ten
+% Netz-werk Netz-werk-re-ser-vie-rung
+% Netz-werk-adap-ter Fein-ju-stier-ung
+% Da-ten-strom-spe-zi-fi-ka-tion Pa-ket-rumpf
+% Kon-troll-in-stanz
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Here, main documents begins %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+
+\frontmatter
+
+\include{Preface/01_Title}
+%\blankpage
+\include{Preface/02_Declaration}
+%\blankpage
+%\include{Preface/03_Acknowledgement}
+%\blankpage
+\include{Preface/04_Abstract}
+\blankpage
+
+\tableofcontents
+
+%Acronyms
+\ifuseglossaries
+	\newpage
+	\thispagestyle{empty}
+	%\deftranslation[to=German]{Acronyms}{Abkürzungsverzeichnis}
+	\printglossary[type=\acronymtype,style=long,title={Abk\"urzungsverzeichnis}]
+\else
+\fi
+
+%Symbole ausgeben
+\ifuseglossaries
+	\printglossary[type=symbolslist, style=mylong]
+\else
+\fi
+
+
+%% -----------------
+%% |   Main part   |
+%% -----------------
+\mainmatter
+\pagenumbering{arabic}
+\include{Main/1_Introduction}      
+\include{Main/2_Fundamentals_Related_Work}     
+\include{Main/3_Conditions_Preliminaries} 		
+\include{Main/4_Concepts}
+\include{Main/5_Evaluation}
+\include{Main/6_Conclusion_Future_Work}      
+
+%% --------------------
+%% |   Appendix+Verzeichnisse   |
+%% --------------------
+\appendix
+\include{Appendix/Appendix}
+
+% List of Figures
+\cleardoublepage
+\addcontentsline{toc}{chapter}{\listfigurename}
+\listoffigures
+
+% Liste of Tables
+\cleardoublepage
+\addcontentsline{toc}{chapter}{\listtablename}
+\listoftables
+
+% Bibliography
+\bibliographystyle{IEEEtranSA}   		% IEEE Alphanumeric
+\cleardoublepage
+\addcontentsline{toc}{chapter}{Literaturverzeichnis}
+\bibliography{thesis_bibtex}
+
+% Online References
+\ifuseglossaries
+	\printglossary[type=onlineref, style=mylist]
+\else
+\fi
+
+
+\end{document}

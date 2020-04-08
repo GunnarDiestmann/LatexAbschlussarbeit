@@ -1,0 +1,61 @@
+% !TeX root = ../thesis.tex
+
+
+\chapter*{Kurzfassung}
+\addcontentsline{toc}{chapter}{Kurzfassung}
+
+Die vorliegende Masterarbeit besch\"aftigt sich mit der Entwicklung eines Ansatzes zur Generierung von kooperativen Fahrstreifenwechseltrajektorien f\"ur hochautomatisierte Fahrzeuge.
+Bei dem Ansatz wird auf eine explizite Kommunikation zwischen den Fahrzeugen verzichtet.
+Dadurch erlaubt der Ansatz ein kooperatives Verhalten zwischen dem automatisierten Fahrzeug und den von Menschen gef\"uhrten Fahrzeugen.
+
+In dem entwickelten Ansatz findet eine Trajektorieplanung f\"ur einen Fahrsteifenwechsel statt, bei der von einem kooperativen Verhalten der beteiligten Fahrzeuge ausgegangen wird.
+Diese Annahme erm\"oglicht, dass auch bei dichtem Verkehr eine valide Fahrstreifenwechseltrajektorie gefunden werden kann.
+Die Ermittlung der Fahrstreifenwechseltrajektorie findet in einem Optimierungsverfahren statt.
+Um die Interaktion mit den Fahrzeugen in der Umgebung des automatisierten Fahrzeuges zu modellieren wird eine Multi-Agenten-Optimierung angewandt. 
+Dabei wird die Bewegungspr\"adiktion der anderen Fahrzeuge in das Optimierungsproblem integriert.
+Das kooperative Verhalten wird durch ein Gesamtkostenfunktional modelliert, bei dem zus\"atzlich zu den Kosten des Ego"=Fahrzeuges auch die Kosten der am Fahrstreifenwechselman\"over beteiligten Fahrzeuge ber\"ucksichtigt werden.
+
+Das Optimierungsproblem wird durch einen samplingbasierten Ansatz gel\"ost.
+Dazu werden zuf\"allige Geschwindigkeitsprofile erzeugt.
+F\"ur jedes der Geschwindigkeitsprofile wird ein Fahrstreifenwechselpfad erzeugt.
+Anschlie{\ss}end wird f\"ur die sich daraus ergebende Trajektorie bestimmt, welche Fahrzeuge auf dem Zielfahrstreifen direkt an dem Fahrstreifenwechselman\"over beteiligt sind.
+F\"ur diese Fahrzeuge wird in einer inneren Optimierung eine kooperative Trajektorie pr\"adiziert und so ein Trajektorienset mit einem kooperativen Fahrstreifenwechsel erzeugt.
+Aus allen erzeugten Trajektoriensets wird dasjenige mit den geringsten Gesamtkosten ausgew\"ahlt.
+
+Der entwickelte Ansatz wird simulativ validiert. 
+Zuerst werden die Ergebnisse eines einzelnen Planungsschrittes in verschieden Szenarien analysiert. 
+Anschlie{\ss}end wird untersucht wie sich das automatisierte Fahrzeug bei kooperativen und unkooperativen Verhalten der Fahrzeuge auf dem Zielfahrstreifen verh\"alt, unter Ber\"ucksichtigung fortlaufender Neuplanung der Trajektorien.
+
+\textbf{Schlagw\"orter}: Trajektorienplanung, kooperative Verhaltensplanung, Multi"=Agenten"=Optimimierung, Fahrstreifenwechsel, Kostenfunktional, Pfadplanung.
+
+
+
+\chapter*{Abstract}
+\addcontentsline{toc}{chapter}{Abstract}
+In this master thesis an approach for generation of cooperative lane change trajectories for highly automated vehicles is developed.
+The approach doesn't make use of an explicit vehicle-to-vehicle communication.
+Therefor it is suitable for cooperation between the automated vehicle and human-driven vehicles.
+
+The trajectory planning algorithm of this approach assumes a cooperative behavior of all involved vehicles.
+Therefor a lane change can take place even in dense traffic.
+The lane changing trajectory is generated in an optimization.
+To model the interaction between the ego vehicle and vehicles in its surrounding a multi-agent-optimization is used.
+Thus predictive paths of the other vehicles are integrated into the optimization problem.
+In order to model the cooperative behavior of the involved vehicles, a new cost functional is introduced, containing not only the cost of the ego vehicle but also the cost of all vehicles involved in the lane change maneuver.
+
+The optimization problem is solved by a sampling based approach.
+For this purpose random velocity profiles are generated.
+For each of these velocity profiles, a path is generated resulting in a trajectory for each of the velocity profiles.
+Subsequently for each trajectory, it is determined which of the vehicles are directly involved in the lane changing maneuver.
+For each of these vehicles an cooperative trajectory is predicted in an inner optimization process resulting in a trajectory set of a cooperative lane change maneuvers.
+The generated trajectory sets are evaluated by the presented cost functional. 
+The trajectory set resulting in the lowest cost is chosen as the solution of the optimization problem.
+
+The presented approach is evaluated in simulation.
+At first the results of a single planning step are analyzed.
+Subsequently, an evaluation of the automated vehicle's behavior when dealing with cooperative and uncooperative vehicles on the traget lane is done.
+This is achieved by consideration of continuous replanning of the trajectory.
+
+
+
+\textbf{Keywords}: Trajectory planning, cooperative behavior planning, multi agent optimization, lane change maneuver, cost functional, path planning.

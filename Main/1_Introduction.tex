@@ -1,0 +1,84 @@
+% !TeX root = ../thesis.tex
+
+\chapter{Einleitung}
+\label{sec:introduction}
+
+%\gls{online_reference}
+
+Automatisierte Fahrzeuge bieten ein hohes Potential zur Steigerung von Sicherheit und Komfort.
+Schon heute zeigen automatisierte Fahrsysteme wie Abstandsregeltempomaten oder Spurhalteassistenten, dass sie in der Lage sind von Menschen verursachte Unf\"alle zu vermeiden.
+Nachdem sich Systeme dieser Art bereits erfolgreich am Markt etabliert haben ist das Ziel nun, die Automatisierung der Fahrzeuge bis hin zum vollautomatisierten Fahrzeug zu steigern.
+Mit steigender Automatisierung treten auch immer komplexere und anspruchsvollere Fahrsituationen auf die vom automatisierten Fahrzeug gemeistert werden m\"ussen.
+Ab einem gewissen Automatisierungsgrad sind auch Situationen in den einen kooperatives Fahrverhalten gefordert ist nicht mehr zu vermeiden.
+
+\section{Motivation}
+Neben der maschinellen Wahrnehmung ist die Bewegungsplanung eines der anspruchsvollsten Teilprobleme von automatisierten Fahrzeugen.
+Die meisten existierenden Ans\"atze zur Bewegungsplanung zeigen ein rein reaktives Fahrverhalten \cite{Lenz2016}.
+Dabei werden andere Verkehrsteilnehmer als bewegte Hindernisse wahrgenommen zu denen ein Sicherheitsabstand eingehalten werden muss.
+Dies f\"uhrt zu einem konservativen Fahrverhalten der automatisierten Fahrzeuge.
+In den meisten Fahrsituationen ist ein solcher Ansatz v\"ollig ausreichend.
+Jedoch kommen im realen Verkehr immer wieder Fahrsituationen vor die menschliche Fahrer l\"osen indem sie mit anderen Fahrzeugen kooperieren.
+F\"ur automatisierte Fahrzeuge die kein kooperatives Fahrverhalten zeigen k\"onnen, wird es schwierig in solchen Situationen die beste oder \"uberhaupt eine L\"osung zu finden.
+
+Menschlichen Fahrern ist ein kooperatives Verhalten m\"oglich, weil sie in der Regel dazu in der Lage sind die Intensionen von anderen Verkehrsteilnehmern zu erkennen und entsprechend darauf zu reagieren \cite{Wei2013}.
+Komplexe Verkehrssituationen in denen es zur Interaktion mit anderen Verkehrsteilnehmern kommt werden gel\"ost, indem zum einen ein kooperatives Verhalten gegen\"uber anderen Fahrzeugen gezeigt wird und zum anderen auch ein kooperatives Verhalten von anderen erwartet wird.
+Verh\"alt sich ein anderes Fahrzeug gegen den Erwartungen nicht kooperativ, werden unkomfortable aber sichere Fahrman\"over in Kauf genommen.
+
+Auch automatisierte Fahrzeuge sollten ein kooperatives Fahrverhalten aufzuweisen.
+Zum einen k\"onnen einige Fahrsituationen ohne ein solches Verhalten nicht erfolgreich gemeistert werden.
+Auf der anderen Seite ist ein kooperatives Verhalten notwenig um ein menschen\"ahnliches Fahrverhalten zu zeigen.
+Dies ist wichtig, da es menschlich gef\"uhrten Fahrzeugen die Einsch\"atzung der automatisierten Fahrzeuge erleichtert und ihre Akzeptanz f\"ordert \cite{Naumann2017}.
+Fahrzeuge die nicht \"uber ein kooperatives Verhalten verf\"ugen zeigen in Interaktion mit anderen Fahrzeugen h\"aufig ein Verhalten das als sozial nicht akzeptabel gewertet werden kann \cite{Wei2013}.
+
+Die Nutzung von Fahrzeug"=zu"=Fahrzeug Kommunikationssystemen zur kooperativen Bewegungsplanung war bereits h\"aufig Gegenstand von Forschungen.
+Hier werden direkte Kommunikationskan\"ale zum Informationsaustausch zwischen den Fahrzeugen genutzt.
+Sie sind nur einer der m\"oglichen Kommunikationskan\"ale zwischen Fahrzeugen \cite{Ulbrich2015}.
+Da automatisierte Fahrzeuge sich die Stra{\ss}e in absehbarer Zukunft vor allem mit Fahrzeugen teilen die nicht \"uber einen solchen Kommunikationskanal verf\"ugen, muss vorerst auf andere Kommunikationskan\"ale zur\"uck gegriffen werden.
+In vielen F\"allen wird ein kooperatives Verhalten modelliert indem im Kostenfunktional zur Berechnung der eigenen Trajektorie auch Kosten von anderen Fahrzeugen ber\"ucksichtigt werden.
+
+Ein Fahrstreifenwechsel ist ein besonders h\"aufig vorkommendes Fahrman\"over bei dem es zur Interaktion mit anderen Fahrzeugen kommt.
+Fahrzeuge auf dem Zielfahrstreifen zeigen ein kooperatives Verhalten indem sie ihr Geschwindigkeit anpassen um anderen Fahrzeugen den Fahrstreifenwechsel zu erleichtern bzw. zu erm\"oglichen.
+Ein Fahrstreifenwechsel stellt bei dichtem Verkehr au{\ss}erdem eine sehr komplexes Fahrman\"over dar.
+Es h\"angt von mehreren Fahrzeugen gleichzeitig ab und erfordert mehrere taktische Entscheidungen.
+Zus\"atzlich kann der Pfad des Fahrzeuges nicht als durch die Fahrbahnmarkierungen gegeben angenommen werden.
+
+
+\section{Zielsetzung der Arbeit}
+Ziel der Arbeit ist die Entwicklung eines Ansatzes zur Trajektorienplanung f\"ur kooperative Fahrstreifenwechsel von hochautomatisierten Fahrzeugen.
+Der Ansatz soll zu einem kooperativen Verhalten zwischen dem automatisierten Fahrzeug und nicht automatisierten Fahrzeugen f\"uhren.
+Der entwickelte Ansatz soll anschlie{\ss}end an beispielhaften Szenarien evaluiert werden.
+Dazu sollen zum einen die Ergebnisse eines einzelnen Planungsschrittes analysiert werden und zum anderen das Verhalten des Ego"=Fahrzeuges bei fortlaufenden Neuplanung der Trajektorie.
+
+An die Trajektorienplanung werden folgende Anforderungen gestellt:
+\begin{itemize}
+\item \textit{Generierung von sicheren, komfortablen und kooperativen Trajektorien}: Es sollen nur Trajektorien erzeugt werden, die nicht zu einer Kollision mit anderen Verkehrsteilnehmern f\"uhren. Die Trajektorie soll au{\ss}erdem m\"oglichst komfortable sein und ein kooperatives Fahrverhalten aufweisen. 
+\item \textit{Anwendbar in dichtem Verkehr}: Da der Ansatz vorerst nur simulativ getestet wird, wird keine Echtzeitf\"ahigkeit des Algorithmus gefordert. Es soll bei der Entwicklung des Ansatzes jedoch darauf geachtet werden, dass der Rechenaufwand auch bei Betrachtung von mehreren Fahrzeugen nicht stark ansteigt, sodass die Anwendbarkeit auch in dichtem Verkehr m\"oglich bleibt.
+\item \textit{Valide Trajektorie bei fortlaufender Neuplanung}: Eine reale Anwendung macht eine fortlaufende Neuplanung in regelm\"a{\ss}igen Zeitabst\"anden notwendig. Der Ansatz soll deshalb auch bei fortlaufender Neuplanung zu einer validen letztendlich gefahrenen Trajektorie f\"uhren.
+\end{itemize}
+
+Zur Evaluierung des Ansatzes sollen folgende Teilaufgaben gel\"ost werden:
+\begin{itemize}
+\item \textit{Szenarioauswahl}: Es sollen m\"oglichst aussagekr\"aftige Fahrstreifenwechselszenarien ausgew\"ahlt werden. Durch die Szenarien soll es m\"oglich sein den Ansatz mit seinen wichtigsten Teilaspekten zu evaluieren.
+\item \textit{Implementierung}: Der entwickelte Ansatz soll, soweit f\"ur die ausgew\"ahlten Szenarien notwendig, implementiert werden. Bei der Implementierung ist darauf zu achten, dass der Algorithmus modular aufgebaut ist, sodass einzelne Module erg\"anzt oder ausgetauscht werden k\"onnen.
+\item \textit{Simulation}: Der implementierte Ansatz soll anschlie{\ss}end in einer geeigneten Simulationsumgebung valdiert werden.
+\end{itemize}
+
+\section{Struktur}
+Die Arbeit beginnt in Kapitel~\ref{sec:fundamentals_related-work} mit Grundlagen zur Trajektorieplanung allgemein und zur kooperativen Trajektorienplanung. 
+In diesem Kapitel wird au{\ss}erdem noch das in dieser Arbeit verwendete Frenet"=Koodinatensystem und zwei exemplarische verwandte Arbeiten zur kooperativen Verhaltensplanung vorgestellt.
+In Kapitel~\ref{sec:underlying-conditions_preliminaries} wird anschlie{\ss}end der von Naumann und Stiller \cite{Naumann2017} vorgestellte Ansatz zur kooperativen Bewegungsplanung erl\"autert.
+Dieser Ansatz war Ausgangspunkt des in dieser Arbeit entwickelten Ansatzes und wird deshalb als Basisalgorithmus bezeichnet.
+Es werden au{\ss}erdem dieser Arbeit zu Grunde liegende Annahmen vorgestellt und begr\"undet.
+
+In Kapitel~\ref{sec:concepts} wird zun\"achst die Auswahl des Basisalgorithmus begr\"undet und anschlie{\ss}end erarbeitet, welche Einschr\"ankungen sich durch den Algorithmus ergeben.
+Aufbauend auf diesen Einschr\"ankungen wird als n\"achstes der in dieser Arbeit entwickelte Ansatz zur Trajektorienplanung von kooperativen Fahrstreifenwechseln vorgestellt.
+Es wird zuerst ein Gesamt\"uberblick gegeben, bevor anschlie{\ss}end die wichtigsten Teilaspekte des Ansatzes beschrieben und diskutiert werden.
+
+In Kapitel~\ref{sec:evaluation} wird dann auf die Evaluierung des Ansatzes eingegangen. 
+Dazu findet zuerst eine Auswahl beispielhafter Szenarien statt.
+Anschlie{\ss}end wird auf die Implementierung des Ansatzes eingegangen.
+Danach werden die Simulationsergebnisse der einzelnen Szenarien vorgestellt und diskutiert.
+Dazu wird zuerst ein einzelner Planungsschritt analysiert und anschlie{\ss}end wird das Verhalten des Ego"=Fahrzeuges bei einer fortlaufenden Neuplanung der Trajektorie betrachtet.
+Die Arbeit endet in Kapitel~\ref{sec:conclusion_future-work} mit einem Fazit, indem die wichtigsten Erkenntnisse dieser Arbeit zusammengestellt werden und einem Ausblick auf eine m\"ogliche Weiterf\"uhrung des Themas.
+
+

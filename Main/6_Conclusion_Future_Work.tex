@@ -1,0 +1,59 @@
+% !TeX root = ../thesis.tex
+
+\chapter{Zusammenfassung}
+\label{sec:conclusion_future-work}
+In dieser Arbeit wurde ein Trajektorienplanungsansatz f\"ur einen kooperativen Fahrstreifenwechsel vorgestellt.
+In einer Multi"=Agenten"=Optimierung wird sowohl die Fahrstreifenwechseltrajektorie des Ego"=Fahrzeuges ermittelt als auch eine Bewegungspr\"adiktion der umgebenden Fahrzeuge erstellt.
+Dadurch kann die Interaktion mit anderen Fahrzeugen abgebildet werden.
+Das Optimierungsproblem wird durch ein randomisiertes Verfahren gel\"ost.
+Daf\"ur werden zuf\"allige Trajektorien des Ego"=Fahrzeuges ermittelt und anschlie{\ss}end f\"ur jedes dieser Geschwindigkeitsprobleme ein Pfad generiert.
+In einer inneren Optimierung wird f\"ur alle interagierenden Fahrzeuge eine kooperative Trajektorie ermittelt.
+Alle andere Fahrzeuge verhalten sich entsprechend des \gls{idm}.
+Die sich ergebenden Trajektoriensets werden durch ein Gesamtkostenfunktional bewertet, das neben den Kosten des Ego"=Fahrzeuges auch die Kosten der kooperativen Fahrzeuge ber\"ucksichtigt.
+
+Der entwickelte Ansatz wird in verschiedenen Szenarien evaluiert.
+Dabei wurden zun\"achst die Ergebnisse eines einzelnen Planungsschrittes untersucht.
+Anschlie{\ss}end wurde das Verhalten des Ego"=Fahrzeuges bei einer fortlaufenden Neuplanung der Trajektorie betrachtet.
+Dazu wurde zuerst von einem kooperativen und anschlie{\ss}end von einem egoistischen Verhalten der Fahrzeuge auf dem Zielfahrstreifen ausgegangen.
+
+
+\section{Fazit}
+Es konnte gezeigt werden, dass durch den vorgestellten Ansatz ein Trajektorienset mit einem kooperativen und sicheren Fahrstreifenwechsel erzeugt wird.
+Die Kosten des Fahrstreifenwechsels, die anhand des vorgestellten Kostenfunktionals berechnet wurden, konnten im Vergleich zu einem unkooperativen Fahrstreifenwechsel deutlich herabgesetzt werden.
+Auch bei dichtem Verkehr auf dem Zielfahrstreifen wird ein Trajektorienset generiert, bei dem das Ego"=Fahrzeug einen kooperativen Fahrstreifenwechsel vollzieht, ohne dabei auf dem aktuellen Fahrstreifen stehen bleiben zu m\"ussen.
+
+Es konnte weiterhin gezeigt werden, dass das Ego"=Fahrzeug nicht nur von einem kooperativen Fahrverhalten der anderen Teilnehmer ausgeht sondern selbst auch ein kooperatives Fahrverhalten beim Fahrstreifenwechsel zeigt.
+Sind aufgrund einer niedrigeren Anfangsgeschwindigkeit des Ego"=Fahrzeuges die Nachteile der Fahrzeuge auf dem Zielfahrstreifen im Vergleich zu den eigenen Vorteilen zu hoch, wird eine L\"ucke gew\"ahlt die nicht zur Minimierung des eigenen Kostenfunktionals f\"uhrt.
+Damit wird ein starkes Ausbremsen der Fahrzeuge auf dem Zielfahrstreifen vermieden, solange eine andere L\"ucke in Aussicht ist, die f\"ur den Fahrstreifenwechsel genutzt werden kann.
+
+Bei einer fortlaufenden Neuplanung f\"uhrt der vorgestellte Ansatz ebenfalls zu einer kooperativen und sicheren Fahrstreifenwechseltrajektorie solang sich die anderen Fahrzeuge \"ahnlich zur in der Optimierung generierten Bewegungspr\"aditkion verhalten.
+Es wurde jedoch auch ersichtlich, dass der Ansatz zu einem unerw\"unschten Fahrverhalten des Ego"=Fahrzeuges f\"uhrt wenn die anderen Fahrzeuge stark von der Bewegungspr\"adiktion abweichen und sich egoistisch verhalten.
+Um einen sicheren Fahrstreifenwechsel garantieren zu k\"onnen muss der vorgestellte Ansatz deshalb durch parallel dazu laufende Sicherheits\"uberpr\"ufungen erg\"anzt werden.
+
+Der vorgestellte Ansatz wurde in Szenarien mit unterschiedlich vielen Fahrzeugen auf dem Zielfahrstreifen simuliert.
+Dabei konnte gezeigt werden, dass die Laufzeit weniger als linear mit der Anzahl der Fahrzeuge zunimmt.
+
+
+
+\section{Ausblick}
+Ziel des Trajektorienplanungsansatzes ist die Anwendung im realen Verkehr.
+Um dies zu erreichen muss der Planungsalgorithmus echtzeitf\"ahig sein, eine sichere Fahrstreifenwechseltrajektorie garantieren und es m\"ussen getroffene Annahmen aufgehoben bzw. aufgelockert werden.
+
+Bei der derzeitigen Implementierung weicht die Laufzeit des Algorithmus stark von der Laufzeit ab, die f\"ur eine Echtzeitf\"ahigkeit gefordert w\"are.
+Um dies zu erreichen sollte auf eine interpretierte Programmiersprache wie Python verzichtet werden und auf eine Programmiersprach zur\"uckgegriffen werden die ein effizientes ausf\"uhrendes Programm erzeugt (z.B. C++).
+Ein hohes Potenzial um die Laufzeit des Algorithmus deutlich zu verringern birgt au{\ss}erdem, das innere Optimierungsproblem durch ein weitaus effizienteres lokales L\"osungsverfahren zu ersetzten.
+In dem vorgestellten Ansatz wurde sowohl f\"ur die innere als auch f\"ur die \"au{\ss}ere Optimierung ein randomisiertes Verfahren genutzt.
+Da in der inneren Optimierung bis auf die Trajektorie des betrachteten Fahrzeuges alle Trajektorien vorgegeben sind, ist hier unter zuhilfenahme von vereinfachenden Annahmen ein lokales L\"osungsverfahren vorstellbar.
+
+Um trotz eines kooperativen Planungsansatzes die Sicherheit beim Fahrstreifenwechsel zu garantieren m\"ussen weitere \"Uberpr\"ufungen parallel zum Planungsalgorithmus durchgef\"uhrt werden.
+Diese \"Uberpr\"ufungen m\"ussen garantieren, dass ein Fahrstreifenwechsel nur durchgef\"uhrt wird, wenn sichergestellt ist, dass der Fahrstreifenwechsel zu keinem Unfall f\"uhrt, f\"ur den das Ego"=Fahrzeuge verantwortlich gemacht werden kann.
+Ziel einer zuk\"unftigen Arbeit k\"onnte die Erarbeitung eines Sicherheitskonzeptes f\"ur ein Fahrstreifenwechsel sein.
+Dieses Sicherheitskonzept sollte sowohl verschiedene Sicherheits\"uberp\"ufungen, die f\"ur einen sicheren Fahrstreifenwechsel notwendig sind, beinhalten als auch entsprechende Notfallpl\"ane falls eine Sicherheitsbedingung verletzt wird.
+
+In dieser Arbeit wurden Annahmen getroffen, die die Anwendung des Planungsansatzes auf spezielle Szenarien beschr\"ankt.
+Unter anderem wurde davon ausgegangen, dass kein anderes Fahrzeug w\"ahrend des Planungshorizontes einen Fahrstreifenwechsel vornimmt.
+Damit war der Pfad der anderen Fahrzeuge vorgegeben und es konnte auf eine einfache fahrstreifenbasierte Pr\"adiktion zur\"uckgegriffen werden.
+Haben mehrere Fahrzeuge eine Fahrstreifenwechselintension wird die Fahrsituation erheblich komplexer.
+Es m\"ussen nun auch Fahrstreifenwechselinteraktionen, an denen das Ego"=Fahrzeug nicht beteiligt ist, ber\"ucksichtig werden.
+Kommt es zur Interaktion mit einem Fahrzeug das ebenfalls eine Fahrstreifenwechselintenstion hat, muss in der Optimierung nicht nur ein kooperatives Geschwindigkeitsprofil des anderen Fahrzeuges erzeugt werden sondern auch der entsprechende Pfad.
+In einer zuk\"unftigen Arbeit k\"onnte der bestehende Ansatz entsprechend erweitert werden und somit eine Vielzahl verschiedener Fahrstreifenwechselszenarien abgedeckt werden.
