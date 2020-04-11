@@ -1,0 +1,291 @@
+% usage: \gls{} \glspl{} or \acrshort{}
+	
+%Befehle für Symbole
+%Zeit
+\newglossaryentry{symb:t_lc}{
+name=$t_\mathrm{lc}$,
+description={Zeitpunkt des Fahrstreifenwechsels: Fahrbahnmarkierung wird \"uberquert [$s$]},
+sort=atimelanechange, type=symbolslist
+}
+\newglossaryentry{symb:t_coop,start}{
+name=$t_\mathrm{coop,start}$,
+description={Beginn der Kooperation [$s$]},
+sort=atimecoopstart, type=symbolslist
+}
+\newglossaryentry{symb:t_coop,end}{
+name=$t_\mathrm{coop,end}$,
+description={Ende der Kooperation [$s$]},
+sort=atimecoopend, type=symbolslist
+}
+\newglossaryentry{symb:t_abs}{
+name=$T_\mathrm{abs}$,
+description={Gew\"unschter Zeitabstand zum vorausfahrenden Fahrzeug [$s$]},
+sort=atimeabs, type=symbolslist
+}
+\newglossaryentry{symb:t_lcd}{
+name=$t_\mathrm{lcd}$,
+description={Dauer des Fahrstreifenwechsels [$s$]},
+sort=atimelanechangedauer, type=symbolslist
+}
+\newglossaryentry{symb:t_verarb}{
+name=$t_\mathrm{verarb}$,
+description={Ben\"otigte Zeit zur Trajektorienplanung / Neuplanungsintervall [$s$]},
+sort=atimever, type=symbolslist
+}
+\newglossaryentry{symb:t_jetzt}{
+name=$t_\mathrm{jetzt}$,
+description={Beginn des Planungshorizonts [$s$]},
+sort=atimejetzt, type=symbolslist
+}
+
+%Kosten
+\newglossaryentry{symb:G_ego}{
+name=$G_\mathrm{ego}$,
+description={Kosten des Ego-Fahrzeuges},
+sort=aKostenego, type=symbolslist
+}
+\newglossaryentry{symb:G_coop}{
+name=$G_i^\mathrm{t,coop}$,
+description={Kosten der kooperativen Fahrzeuge w\"ahrend der Kooperation},
+sort=aKostencoop, type=symbolslist
+}
+\newglossaryentry{symb:G_v}{
+name=$G_\mathrm{v}$,
+description={Geschwindigkeitskostenterm},
+sort=aKostengesch, type=symbolslist
+}
+\newglossaryentry{symb:G_a}{
+name=$G_\mathrm{a}$,
+description={Beschleunigungskostenterm},
+sort=aKostenbesch, type=symbolslist
+}
+\newglossaryentry{symb:G_sd}{
+name=$G_\mathrm{sd}$,
+description={Kostenterm f\"ur Sicherheitsabst\"ande},
+sort=aKostensd, type=symbolslist
+}
+\newglossaryentry{symb:G_lc}{
+name=$G_\mathrm{lc}$,
+description={Kostenterm f\"ur Fahrstreifenwechsel},
+sort=aKostenfw, type=symbolslist
+}
+\newglossaryentry{symb:G_lcend}{
+name=$G_\mathrm{lc,end}$,
+description={Kostenterm f\"ur Zustand am End der Kooperation},
+sort=aKostenfwe, type=symbolslist
+}
+\newglossaryentry{symb:G_comf}{
+name=$G_\mathrm{comf}$,
+description={Komfortkosten},
+sort=aKostenkomf, type=symbolslist
+}
+\newglossaryentry{symb:G_disc}{
+name=$G_\mathrm{disc}$,
+description={Diskomfortkosten},
+sort=aKostendiscomf, type=symbolslist
+}
+\newglossaryentry{symb:G_inf}{
+name=$G_\mathrm{inf}$,
+description={Unrealisierbarkeitskosten},
+sort=aKosteninf, type=symbolslist
+}
+
+\newglossaryentry{symb:f_opt}{
+name=$f_\mathrm{opt}$,
+description={Festgelegtes Optimum},
+sort=afinfpopt, type=symbolslist
+}
+
+\newglossaryentry{symb:f_discstartp}{
+name=$f_\mathrm{disc,start}^+$,
+description={Grenze zur Diskomfortzone bei positiver Abweichung vom Optimum},
+sort=afdiscp, type=symbolslist
+}
+
+\newglossaryentry{symb:f_discstartn}{
+name=$f_\mathrm{disc,start}^-$,
+description={Grenze zur Diskomfortzone bei negativer Abweichung vom Optimum},
+sort=afdiscn, type=symbolslist
+}
+
+\newglossaryentry{symb:f_infstartp}{
+name=$f_\mathrm{inf,start}^+$,
+description={Grenze zur Unrealisierbarkeitszone bei positiver Abweichung vom Optimum},
+sort=afinfp, type=symbolslist
+}
+
+\newglossaryentry{symb:f_infstartn}{
+name=$f_\mathrm{inf,start}^-$,
+description={Grenze zur Unrealisierbarkeitszone bei negativer Abweichung vom Optimum},
+sort=afinfn, type=symbolslist
+}
+
+%Trajektorie
+\newglossaryentry{symb:x_optTra}{
+name=$\pmb{x}$,
+description={Optimale Trajektorie},
+sort=aTrajektorie, type=symbolslist
+}
+\newglossaryentry{symb:x_Traset}{
+name=$\pmb{X}$,
+description={Trajektorienset},
+sort=aTrajektorienset, type=symbolslist
+}
+\newglossaryentry{symb:x_TraDisk}{
+name=$\pmb{x}_k$,
+description={Diskreter Zeitschritt der optimal Trajektorie},
+sort=aTrajektoriendik, type=symbolslist
+}
+
+\newglossaryentry{symb:h}{
+name=$h$,
+description={Diskretisierungsschrittweite [$s$]},
+sort=ah, type=symbolslist
+}
+
+
+\newglossaryentry{symb:Zone_komf}{
+name=$Z_\mathrm{comf}$,
+description={Komfortzone},
+sort=aZonecomf, type=symbolslist
+}
+\newglossaryentry{symb:Zone_disc}{
+name=$Z_\mathrm{disc}$,
+description={Diskomfortzone},
+sort=aZonedisc, type=symbolslist
+}
+\newglossaryentry{symb:Zone_inf}{
+name=$Z_\mathrm{inf}$,
+description={Unrealisierbarkeitszone},
+sort=aZoneinf, type=symbolslist
+}
+
+%Frenet-Koordianten
+\newglossaryentry{symb:s_r}{
+name=$s_r$,
+description={Wegstrecke entlang der Referenzkurve in Frenet-Koordinaten [$m$]},
+sort=asr, type=symbolslist
+}
+\newglossaryentry{symb:d_r}{
+name=$d_r$,
+description={Abstand von der Referenzkurve in Frenet-Koordinaten [$m$]},
+sort=adr, type=symbolslist
+}
+
+\newglossaryentry{symb:s_cs}{
+name=$s_\mathrm{change}^\mathrm{start}$,
+description={Beginn des Fahrstreifenwechsels in Frenet-Koordinaten [$m$]},
+sort=ascs, type=symbolslist
+}
+\newglossaryentry{symb:s_ce}{
+name=$s_\mathrm{change}^\mathrm{end}$,
+description={Ende des Fahrstreifenwechsels in Frenet-Koordinaten [$m$]},
+sort=asce, type=symbolslist
+}
+\newglossaryentry{symb:s_cmin}{
+name=$s_\mathrm{change}^\mathrm{min}$,
+description={Fr\"uhst m\"oglicher Fahrstreifenwechsels in Frenet-Koordinaten [$m$]},
+sort=ascmin, type=symbolslist
+}
+\newglossaryentry{symb:s_cmax}{
+name=$s_\mathrm{change}^\mathrm{max}$,
+description={Weckstreck in Frenet-K. bis zu der der Fahrstreifenwechsel beendet sein muss [$m$]},
+sort=ascmax, type=symbolslist
+}
+
+\newglossaryentry{symb:d_normal}{
+name=$d_\mathrm{normal}$,
+description={Normalisierter Sicherheitsabstand},
+sort=adnormal, type=symbolslist
+}
+
+\newglossaryentry{symb:d_sd}{
+name=$d_\mathrm{sd}$,
+description={Gew\"unschter Sicherheitsabstand [$m$]},
+sort=adsd, type=symbolslist
+}
+
+\newglossaryentry{symb:d_tlc}{
+name=$d_\mathrm{t,lc}$,
+description={Abstand zum hinteren Fahrzeug zum Zeitpunkt des Fahrstreifenwechsels [$m$]},
+sort=adtlc, type=symbolslist
+}
+
+\newglossaryentry{symb:b_nece}{
+name=$b_\mathrm{nece}$,
+description={Notwendige Verz\"ogerung des hinteren Fahrzeugs beim Fahrstreifenwechsels [$m/s^2$]},
+sort=abnece, type=symbolslist
+}
+
+
+
+%Pfad
+\newglossaryentry{symb:F_init}{
+name=$F_\mathrm{init}$,
+description={Pfad des aktuellen Fahrstreifens},
+sort=aFinit, type=symbolslist
+}
+\newglossaryentry{symb:F_target}{
+name=$F_\mathrm{target}$,
+description={Pfad des Zielahrstreifens},
+sort=aFtarget, type=symbolslist
+}
+\newglossaryentry{symb:F_change}{
+name=$F_\mathrm{change}$,
+description={Fahrstreifenwechselpfad},
+sort=aFini, type=symbolslist
+}
+\newglossaryentry{symb:F_lc}{
+name=$F_\mathrm{lc}$,
+description={Gesamtpfad der Fahrstreifenwechseltrajektorie},
+sort=aFlc, type=symbolslist
+}
+
+\newglossaryentry{symb:b_krit}{
+name=$b_\mathrm{krit}$,
+description={Grenzverz\"ogerung die gerade noch im sicheren Bereich ist [$m/s^2$]},
+sort=abkrit, type=symbolslist
+}
+
+%Geschwindigkeiten und Beschleunigungen
+\newglossaryentry{symb:a_start}{
+name=$a_\mathrm{start}$,
+description={Ausgangsbescheunigung [$m/s^2$]},
+sort=aastart, type=symbolslist
+}
+
+\newglossaryentry{symb:a_lcend}{
+name=$a_\mathrm{lc,end}$,
+description={Angenommene Beschleunigung nach Ende des Fahrstreifenwechsels [$m/s^2$]},
+sort=aalcend, type=symbolslist
+}
+
+\newglossaryentry{symb:v_start}{
+name=$v_\mathrm{start}$,
+description={Ausgangsgeschwindigkeit [$m/s$]},
+sort=avstart, type=symbolslist
+}
+
+\newglossaryentry{symb:v_opt}{
+name=$v_\mathrm{opt}$,
+description={Optimalgeschwindigkeit [$m/s$]},
+sort=avopt, type=symbolslist
+}
+
+
+% Griechische Buchstaben	
+\newglossaryentry{symb:theta}{
+name=$\theta$,
+description={Richtung der Trajektorie in Weltkoordinaten},
+sort=gtheta, type=symbolslist
+}
+\newglossaryentry{symb:theta_ref}{
+name=$\theta_\mathrm{ref}$,
+description={Richtung der Referenzkurve in Weltkoordinaten},
+sort=gthetaref, type=symbolslist
+}
+\newglossaryentry{symb:kappa_ref}{
+name=$\kappa_\mathrm{ref}$,
+description={Kr\"ummung der Referenzkurve [$1/m$]},
+sort=gkapparef, type=symbolslist
+}

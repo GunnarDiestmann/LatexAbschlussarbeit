@@ -10,6 +10,12 @@
 *.cb
 *.cb2
 *.pdf
+*.aux
+*.loc
+*.slg
+*.syg
+*.syi
+*\.out\.ps
 
 ## Intermediate documents:
 *.dvi
