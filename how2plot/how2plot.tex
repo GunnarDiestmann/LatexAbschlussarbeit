@@ -1,0 +1,54 @@
+
+\documentclass[12pt,a4paper, pdftex]{scrartcl}
+\usepackage[bottom=30mm, top=30mm, inner=15mm, outer=15mm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{graphics}																			
+\usepackage{subfigure}																				
+\usepackage{listings}
+%
+\usepackage{tikz}
+%
+\usepackage{pgfplots}
+\usepackage{tikz-3dplot}
+\usepackage{filecontents}
+\usetikzlibrary{pgfplots.external}
+
+\renewcommand*{\familydefault}{\sfdefault}
+
+\usetikzlibrary{calc,3d}
+\usepgfplotslibrary{external} 
+\usepgfplotslibrary{colormaps}
+
+
+ \definecolor{pythonBlue}{HTML}{1F77B4}
+ \definecolor{pythonOrange}{HTML}{D38846}
+ \definecolor{pythonGreen}{HTML}{35A435}
+ \definecolor{pythonRed}{HTML}{D62728}
+ \definecolor{pythonPurple}{HTML}{9467BD}
+
+\lstset{ 
+	backgroundcolor=\color{gray!20},   
+	basicstyle=\footnotesize,
+	numbers=left,                   
+	numbersep=5pt,                   % how far the line-numbers are from the code
+	numberstyle=\tiny\color{gray}
+}
+
+%
+
+\begin{document}
+	
+	
+	\input{basics/axis_001.tex}
+	\input{basics/axis_002.tex}
+	\input{basics/axis_003.tex}
+	\input{basics/axis_004.tex}
+	\input{basics/axis_005.tex}
+	
+	
+	\input{marker/marker_001.tex}
+	\input{multiple_plots/multiple_plots_001.tex}
+	\input{scatterhist/scatterhist_001.tex}
+	\input{scatterhist/heatmap_001.tex}
+	
+\end{document}

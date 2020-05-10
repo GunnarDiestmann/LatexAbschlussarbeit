@@ -1,0 +1,27 @@
+
+\subsection{multiple plots}
+
+
+\begin{minipage}{0.4\linewidth}
+	
+	\begin{tikzpicture}
+	\begin{axis}
+	\addplot table {data/sin_data_0_2_6.csv};
+	\addplot table {data/cos_data_0_2_10.csv};
+	\end{axis}
+	\end{tikzpicture}
+	
+\end{minipage}
+\hfill
+\hspace{0mm}
+\begin{minipage}{0.5\linewidth}
+	\begin{lstlisting}
+\begin{tikzpicture}
+\begin{axis}
+\addplot table {data/sin_data_0_2_6.csv};
+\addplot table {data/cos_data_0_2_10.csv};
+\end{axis}
+\end{tikzpicture}
+	\end{lstlisting}
+\end{minipage}
+

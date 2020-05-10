@@ -1,0 +1,64 @@
+\newpage
+\section{markers}
+
+\begin{tikzpicture}
+\begin{axis}
+[
+xtick ={},
+grid=both,
+legend style={
+	at={(axis description cs: .25,.95)},
+	anchor=north east,row sep=-0.1cm},
+xlabel = $x$,
+ylabel = $f(x)$,
+ylabel style = {rotate = -90}
+]
+
+\addlegendentry{ $e^x$ }
+\addplot[color = black!60 , 
+color = pythonBlue , 
+opacity=.9,mark = square*] table {data/exp_001.csv};
+
+\addlegendentry{$x^2$}
+\addplot[color = black!70 ,  
+opacity=.9,mark =triangle* , dashed] table {data/quad_001.csv};
+
+\addlegendentry{$x^3$}
+\addplot[ 
+color = pythonGreen , 
+opacity=.9,mark =*,dotted] table {data/cubic_001.csv};
+
+\end{axis}
+
+\end{tikzpicture}
+
+\begin{lstlisting}
+\begin{tikzpicture}
+\begin{axis}
+[
+xtick ={},
+grid=both,
+legend style={
+	at={(axis description cs: .25,.95)},
+	anchor=north east,row sep=-0.1cm},
+xlabel = $x$,
+ylabel = $f(x)$,
+ylabel style = {rotate = -90} 
+]
+
+\addlegendentry{ $e^x$ }
+\addplot[color = black!60 , 
+color = pythonBlue , 
+opacity=.9,mark = square*] table {data/exp_001.csv};
+
+\addlegendentry{$x^2$}
+\addplot[color = black!70 ,  
+opacity=.9,mark =triangle* , dashed] table {data/quad_001.csv};
+
+\addlegendentry{$x^3$}
+\addplot[ 
+color = pythonGreen , 
+opacity=.9,mark =*,dotted] table {data/cubic_001.csv};
+
+\end{axis}
+\end{lstlisting}

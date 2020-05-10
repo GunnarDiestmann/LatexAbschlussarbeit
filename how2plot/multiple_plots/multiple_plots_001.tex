@@ -1,0 +1,108 @@
+
+
+\newpage
+\section{multiple plots}
+\newcommand{\mypgfheight}{3cm}
+\newcommand{\mypgfwidht}{4cm}
+
+\newcommand{\xlabelDist}{5mm}
+\newcommand{\ylabelDist}{5mm}
+
+\begin{tikzpicture}
+\begin{axis}
+[
+	name = main axis,
+	x label style={at={(axis description cs:0.5,\xlabelDist)},anchor=north},
+	y label style={at={(axis description cs:\ylabelDist,.5)},rotate=0,anchor=south},
+	xtick ={},
+	xticklabels=\empty,
+	ymin =-1.5 , ymax=1.5,
+	grid=both,
+legend style={at={(axis description cs: 1.,1.)},anchor=north east,row sep=-0.1cm},
+	xmin = 0,
+	]
+	\addlegendentry{\hspace{-.0cm}\textbf{\scriptsize{test1}}}
+	\addplot table{data/noisy_sin_1.csv};
+	\addlegendentry{\hspace{-.0cm}\textbf{\scriptsize{test2}}}
+	\addplot [only marks] table{data/noisy_sin_2.csv};
+	
+\end{axis}
+	
+	
+\begin{axis}
+[
+		anchor=south west,
+		at=(main axis.south east), xshift = +.4cm,
+		xtick ={},
+	 	ytick = {},
+		xticklabels=\empty,
+	 	yticklabels=\empty,
+	ymin =-1.5 , ymax=1.5,
+	grid=both,
+legend style={at={(axis description cs: 1.,1.)},anchor=north east,row sep=-0.1cm},
+	xmin = 0,
+		]
+	\addlegendentry{\hspace{-.0cm}\textbf{\scriptsize{test1}}}
+	\addplot table{data/noisy_sin_2.csv};
+	\addlegendentry{\hspace{-.0cm}\textbf{\scriptsize{test2}}}
+	\addplot [only marks] table{data/noisy_sin_4.csv};	
+\end{axis}
+
+\begin{axis}
+[
+anchor=north west,
+at=(main axis.south west), yshift = -.4cm,
+x label style={at={(axis description cs:1.,-.15)},anchor=south},
+y label style={at={(axis description cs:-.015,1.)},rotate=0,anchor=south},
+xlabel= {some label [foo]},
+ylabel= {some other label [bar]},
+ymin =-1.5 , ymax=1.5,
+grid=both,
+legend style={at={(axis description cs: 1.,1.)},anchor=north east,row sep=-0.1cm},
+xmin = 0,
+]
+\addlegendentry{\hspace{-.0cm}\textbf{\scriptsize{test1}}}
+\addplot table{data/sin_data_0_35_25.csv};
+\addlegendentry{\hspace{-.0cm}\textbf{\scriptsize{test2}}}
+\addplot [only marks]table{data/noisy_sin_3.csv};			
+\end{axis}
+
+\begin{axis}
+[
+anchor=north west,
+at=(main axis.south east),xshift=.4cm, yshift = -.4cm,
+ytick = {},
+yticklabels=\empty,
+ymin =-1.5 , ymax=1.5,
+grid=both,
+legend style={at={(axis description cs: 1.,1.)},anchor=north east,row sep=-0.1cm},
+xmin = 0,
+]
+\addlegendentry{\hspace{-.0cm}\textbf{\scriptsize{test1}}}
+\addplot table{data/noisy_sin_1.csv};
+
+\addlegendentry{\hspace{-.0cm}\textbf{\scriptsize{test2}}}
+\addplot[only marks] table{data/noisy_sin_4.csv};			
+\end{axis}
+	
+	
+\end{tikzpicture}
+
+\subsubsection{how to}
+how to align multiple plots: \\
+set upper left axis to main:
+\begin{lstlisting}
+\begin{axis}[...,name = main axis,...]
+\end{lstlisting}
+set other plots relative to the main axis via an anchor (e.g. for lower right)
+\begin{lstlisting}
+anchor=north west,
+at=(main axis.south east),xshift=.4cm, yshift = -.4cm,
+\end{lstlisting}
+add label position to one axis and translate (here for lower right axis)
+\begin{lstlisting}
+x label style={at={(axis description cs:1.,-.15)},anchor=south},
+y label style={at={(axis description cs:-.015,1.)},rotate=0,anchor=south},
+\end{lstlisting}
+
+

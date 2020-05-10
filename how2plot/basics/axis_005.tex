@@ -1,0 +1,81 @@
+\newpage
+\subsection{log axis}
+
+
+\begin{minipage}{0.4\linewidth}
+	
+	\begin{tikzpicture}
+	\begin{axis}[]
+	\addplot table {data/exp_sin_1.csv};
+	\end{axis}
+	\end{tikzpicture}
+	
+\end{minipage}
+\hfill
+\hspace{0mm}
+\begin{minipage}{0.5\linewidth}
+	\begin{lstlisting}
+\begin{tikzpicture}
+\begin{axis}[]
+\addplot table {data/exp_sin_1.csv};
+\end{axis}
+\end{tikzpicture}
+	\end{lstlisting}
+\end{minipage}
+
+\begin{minipage}{0.4\linewidth}
+	
+	\begin{tikzpicture}
+	\begin{axis}
+	[
+		ymode=log
+	]
+	\addplot table {data/exp_sin_1.csv};
+	\end{axis}
+	\end{tikzpicture}
+	
+\end{minipage}
+\hfill
+\hspace{0mm}
+\begin{minipage}{0.5\linewidth}
+	\begin{lstlisting}
+\begin{tikzpicture}
+\begin{axis}
+[
+ymode=log
+]
+\addplot table {data/exp_sin_1.csv};
+\end{axis}
+\end{tikzpicture}
+	\end{lstlisting}
+\end{minipage}
+
+\begin{minipage}{0.4\linewidth}
+	
+	\begin{tikzpicture}
+	\begin{axis}
+	[
+		xmode=log,
+	ymode=log
+	]
+	\addplot table {data/exp_sin_1.csv};
+	\end{axis}
+	\end{tikzpicture}
+	
+\end{minipage}
+\hfill
+\hspace{0mm}
+\begin{minipage}{0.5\linewidth}
+	\begin{lstlisting}
+\begin{tikzpicture}
+\begin{axis}
+[
+xmode=log,
+ymode=log
+]
+\addplot table {data/exp_sin_1.csv};
+\end{axis}
+\end{tikzpicture}
+	\end{lstlisting}
+\end{minipage}
+

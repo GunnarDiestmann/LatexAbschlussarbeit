@@ -1,0 +1,43 @@
+
+\subsection{grid}
+
+
+\begin{minipage}{0.4\linewidth}
+	
+	\begin{tikzpicture}
+	\begin{axis}
+	[
+	xmin=-1, xmax=7,
+	ymin=-1.2,ymax=1.2,
+	minor tick num=5,
+	grid=both,
+	grid style={line width=.1pt, draw=gray!10},
+	major grid style={line width=.2pt,draw=gray!50},
+	]
+	\addplot table {data/sin_data_0_2_6.csv};
+	\addplot table {data/cos_data_0_2_10.csv};
+	\end{axis}
+	\end{tikzpicture}
+	
+\end{minipage}
+\hfill
+\hspace{0mm}
+\begin{minipage}{0.5\linewidth}
+	\begin{lstlisting}
+\begin{tikzpicture}
+\begin{axis}
+[
+xmin=-1,xmax=7,
+ymin=-1.2,ymax=1.2,
+minor tick num=5,
+grid=both,
+grid style={line width=.1pt, draw=gray!10},
+major grid style={line width=.2pt,draw=gray!50},
+]
+\addplot table {data/sin_data_0_2_6.csv};
+\addplot table {data/cos_data_0_2_10.csv};
+\end{axis}
+\end{tikzpicture}
+	\end{lstlisting}
+\end{minipage}
+
