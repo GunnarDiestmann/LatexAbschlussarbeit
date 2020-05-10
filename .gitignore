@@ -9,7 +9,6 @@
 *.fot
 *.cb
 *.cb2
-*.pdf
 *.aux
 *.loc
 *.slg
@@ -192,3 +191,5 @@ TSWLatexianTemp*
 *~
 *.make
 *.d
+*.swp
+**/.ipynb_checkpoints
